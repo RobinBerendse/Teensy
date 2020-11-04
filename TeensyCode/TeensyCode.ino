@@ -20,7 +20,6 @@ int16_t gx, gy, gz;
 bool blinkState = false;
 
 
-
 Encoder enc(14, 15); // create an encoder object
 
 long current_value; // current read
@@ -50,7 +49,6 @@ void loop() {
   current_value = enc.read(); // read the value of the encoder
   
   if (current_value != previous_value) { // compare to previous reading
-    Serial.println(current_value); // if it's changed, print to serial port
     previous_value = current_value; // store the reading for next comparison
   }
 
@@ -63,26 +61,20 @@ void loop() {
   duration = pulseIn(echoPin, HIGH);
   distance = duration * 0.034 / 2;
 
-  Serial.print("Distance = ");
-  Serial.print(distance);
-  Serial.println(" cm");
-
-
   //Gyro
   accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
  
     #ifdef OUTPUT_READABLE_ACCELGYRO
         // display tab-separated accel/gyro x/y/z values
-        Serial.print("a/g:\t");
-        Serial.print(ax); Serial.print("\t");
-        Serial.print(ay); Serial.print("\t");
-        Serial.print(az); Serial.print("\t");
-        Serial.print(gx); Serial.print("\t");
-        Serial.print(gy); Serial.print("\t");
-        Serial.println(gz);
+        Serial.print(ax); Serial.print(",");
+        Serial.print(ay); Serial.print(",");
+        Serial.print(az); Serial.print(",");
+        Serial.print(gx); Serial.print(",");
+        Serial.print(gy); Serial.print(",");
+        Serial.print(gz); Serial.print(",");
+        Serial.print(distance); Serial.print(",");
+        Serial.println(current_value);
     #endif
- 
-    
  
     // blink LED to indicate activity
     blinkState = !blinkState;
