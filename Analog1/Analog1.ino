@@ -1,7 +1,7 @@
 #include <Encoder.h> // include the encoder library
 
 Encoder enc(14, 15); // create an encoder object
-
+//x
 long current_value; // current read
 long previous_value = -999; // previous read
 
